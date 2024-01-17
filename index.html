@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphics with Chart.js</title>
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="buttonsContainer">
+      <div class="buttons">
+        <div class="range">
+          <span>From</span>
+          <input class="dateFrom" type="date" />
+        </div>
+        <div class="range">
+          <span>To</span>
+          <input class="dateTo" type="date" />
+        </div>
+        <select class="button">
+          <option option="months" selected>Months</option>
+          <!-- <option option="weeks">Weeks</option> -->
+          <option option="days">Days</option>
+          <!-- <option option="hours">Hours</option> -->
+        </select>
+      </div>
+      <div class="wrapper">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <div class="depositContainer">
+      <h4 class="title">Deposit:</h4>
+      <div class="depositWrapper">
+        <h3 class="subTitle">Total Deposited: <span class="subTitleThin">3 USDT</span></h3>
+        <p class="desc"><span class="descBold">BSC:</span> 2 USDT</p>
+        <p class="desc"><span class="descBold">MATIC:</span> 1 USDT</p>
+      </div>
+      <div class="depositWrapper">
+        <h3 class="subTitle">Total Cards Spent: <span class="subTitleThin">2103 USDT</span></h3>
+        <p class="desc"><span class="descBold">zkSync:</span> 250 USDT</p>
+        <p class="desc"><span class="descBold">Metamask:</span> 150 USDT</p>
+        <p class="desc"><span class="descBold">Scroll:</span> 450 USDT</p>
+        <p class="desc"><span class="descBold">LayerZero:</span> 300 USDT</p>
+        <p class="desc"><span class="descBold">Starknet:</span> 150 USDT</p>
+        <p class="desc"><span class="descBold">PolygonZkEvm:</span> 150 USDT</p>
+        <p class="desc"><span class="descBold">DeBank:</span> 300 USDT</p>
+        <p class="desc"><span class="descBold">ArbitrumNova:</span> 150 USDT</p>
+        <p class="desc"><span class="descBold">EYWA:</span> 150 USDT</p>
+      </div>
+      <div class="depositWrapper">
+        <h3 class="subTitle">Current Deposit: <span class="subTitleThin">-2097 USDT</span></h3>
+        <p class="desc"><span class="descBold">BSC:</span> -450 USDT</p>
+        <p class="desc"><span class="descBold">MATIC:</span> -1650 USDT</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
