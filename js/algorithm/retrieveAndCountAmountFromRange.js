@@ -20,7 +20,11 @@ export function retrieveAndCountAmountFromRange(type, list, year, month, day, ho
     }
 
     if (type === 'Hours') {
-      if (year === retrievedYear && retrievedMonth.search(month) !== -1 && retrievedDay.search(day) !== -1 && retrievedHour.search(hour)) {
+      const convertedHour = Number(retrievedHour) < 10
+        ? `0${Number(retrievedHour)}:00`
+        : `${Number(retrievedHour)}:00`
+
+      if (year === retrievedYear && retrievedMonth.search(month) !== -1 && retrievedDay.search(day) !== -1 && convertedHour.search(hour) !== -1) {
         amount = Number(item.amount);
       }
     }

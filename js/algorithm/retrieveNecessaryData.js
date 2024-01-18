@@ -54,7 +54,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
         const month = Number(monthFromNumber) + monthCounter < 10
           ? `0${Number(monthFromNumber) + monthCounter}`
           : Number(monthFromNumber) + monthCounter;
-        const convertedMonth = convertNumberToMonths(String(month));
+        const convertedMonth = convertNumberToMonths(String(month)); 
 
         if (type === 'Months') {
           const amount = retrieveAndCountAmountFromRange(type, list, year, month, null, null);
@@ -63,7 +63,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days') {
+        if (type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -80,7 +80,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                 ? `0${Number(dayFromNumber) + dayCounter}`
                 : Number(dayFromNumber) + dayCounter;
               const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+              let hourCounter = 0;
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -94,9 +94,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -127,9 +127,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -158,9 +158,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -188,7 +188,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days') {
+        if (type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -219,9 +219,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -252,9 +252,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -283,9 +283,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -317,7 +317,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days') {
+        if (type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -348,9 +348,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -381,9 +381,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
@@ -412,9 +412,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
                     : `${hourCounter}:00`;
-                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hourCounter);
+                  const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, hour);
 
-                  limitedRange.push({ date: `${hour} ${day}`, amount: amount });
+                  limitedRange.push({ date: `${hour}`, amount: amount });
                   hourCounter++;
                 }
 
