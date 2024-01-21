@@ -1,6 +1,7 @@
 import stats from '../../assets/stats.json' assert { type: 'json' };
 import { convertNumberToMonths } from './convertNumberToMonths.js';
 import { retrieveAndCountAmountFromRange } from './retrieveAndCountAmountFromRange.js';
+import { defineDaysInEachMonth } from './defineDaysInEachMonth.js';
 
 export function defineGraphicSettings(type, rangeFrom, rangeTo) {
   const range = retrieveDataFromRange(type, rangeFrom, rangeTo);
@@ -32,6 +33,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
   const yearToNumber = Number(rangeTo.split("-")[0]);
   const yearRange = yearToNumber - yearFromNumber;
   const limitedRange = [];
+  const daysRange = [];
   let yearCounter = 0;
 
   while (yearCounter <= yearRange) {
@@ -51,9 +53,10 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
 
     if (year === yearFromNumber) {
       while (monthCounter <= monthRange) {
-        const month = Number(monthFromNumber) + monthCounter < 10
-          ? `0${Number(monthFromNumber) + monthCounter}`
-          : Number(monthFromNumber) + monthCounter;
+        const month = monthFromNumber + monthCounter < 10
+          ? `0${monthFromNumber + monthCounter}`
+          : monthFromNumber + monthCounter;
+        const currentMonth = monthFromNumber + monthCounter;
         const convertedMonth = convertNumberToMonths(String(month)); 
 
         if (type === 'Months') {
@@ -63,7 +66,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days' || type === 'Hours') {
+        if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -74,13 +77,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           const FIRST_DAY = 1;
           let dayCounter = 0;
 
-          if (month === monthFromNumber) {
+          if (currentMonth === monthFromNumber && monthRange === 0) {
             while (dayCounter <= dayRange) {
-              const day = Number(dayFromNumber) + dayCounter < 10
-                ? `0${Number(dayFromNumber) + dayCounter}`
-                : Number(dayFromNumber) + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0;
+              const day = dayFromNumber + dayCounter < 10
+                ? `0${dayFromNumber + dayCounter}`
+                : dayFromNumber + dayCounter;
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -90,6 +98,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -105,15 +116,20 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month !== monthToNumber) {
-            const DAYS_PER_MONTH_MAX = 31;
+          if (( currentMonth === monthFromNumber || currentMonth !== monthFromNumber) && currentMonth !== monthToNumber) {
+            const monthRange = defineDaysInEachMonth(year, month);
 
-            while (dayCounter <= DAYS_PER_MONTH_MAX) {
+            while (dayCounter < monthRange) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -123,6 +139,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -138,13 +157,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month === monthToNumber) {
-            while (dayCounter <= dayToNumber) {
+          if (currentMonth !== monthFromNumber && currentMonth === monthToNumber) {
+            while (dayCounter < dayToNumber) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -154,6 +178,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -179,6 +206,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
         const month = FIRST_MONTH + monthCounter < 10
           ? `0${FIRST_MONTH + monthCounter}`
           : FIRST_MONTH + monthCounter;
+        const currentMonth = FIRST_MONTH + monthCounter;
         const convertedMonth = convertNumberToMonths(String(month));
 
         if (type === 'Months') {
@@ -188,7 +216,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days' || type === 'Hours') {
+        if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -199,13 +227,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           const FIRST_DAY = 1;
           let dayCounter = 0;
 
-          if (month === monthFromNumber) {
+          if (currentMonth === monthFromNumber && monthRange === 0) {
             while (dayCounter <= dayRange) {
-              const day = Number(dayFromNumber) + dayCounter < 10
-                ? `0${Number(dayFromNumber) + dayCounter}`
-                : Number(dayFromNumber) + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+              const day = dayFromNumber + dayCounter < 10
+                ? `0${dayFromNumber + dayCounter}`
+                : dayFromNumber + dayCounter;
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -215,6 +248,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -230,15 +266,20 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month !== monthToNumber) {
-            const DAYS_PER_MONTH_MAX = 31;
+          if ((currentMonth === monthFromNumber || currentMonth !== monthFromNumber) && currentMonth !== monthToNumber) {
+            const monthRange = defineDaysInEachMonth(year, month);
 
-            while (dayCounter <= DAYS_PER_MONTH_MAX) {
+            while (dayCounter < monthRange) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -248,6 +289,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -263,13 +307,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month === monthToNumber) {
-            while (dayCounter <= dayToNumber) {
+          if (currentMonth !== monthFromNumber && currentMonth === monthToNumber) {
+            while (dayCounter < dayToNumber) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -279,6 +328,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -300,14 +352,11 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
     }
 
     if (year !== yearFromNumber && year === yearToNumber) {
-      const monthToNumber = rangeTo.split("-")[1].split("")[0].search('0') !== -1
-        ? Number(rangeTo.split("-")[1].split("")[1])
-        : Number(rangeTo.split("-")[1]);
-
       while (monthCounter < monthToNumber) {
         const month = FIRST_MONTH + monthCounter < 10
           ? `0${FIRST_MONTH + monthCounter}`
           : FIRST_MONTH + monthCounter;
+        const currentMonth = FIRST_MONTH + monthCounter;
         const convertedMonth = convertNumberToMonths(String(month));
 
         if (type === 'Months') {
@@ -317,7 +366,7 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           monthCounter++;
         }
 
-        if (type === 'Days' || type === 'Hours') {
+        if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
           const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
             ? Number(rangeFrom.split("-")[2].split("")[1])
             : Number(rangeFrom.split("-")[2]);
@@ -328,13 +377,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
           const FIRST_DAY = 1;
           let dayCounter = 0;
 
-          if (month === monthFromNumber) {
+          if (currentMonth === monthFromNumber && monthRange === 0) {
             while (dayCounter <= dayRange) {
               const day = Number(dayFromNumber) + dayCounter < 10
                 ? `0${Number(dayFromNumber) + dayCounter}`
                 : Number(dayFromNumber) + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -344,6 +398,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -359,15 +416,20 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month !== monthToNumber) {
-            const DAYS_PER_MONTH_MAX = 31;
+          if ((currentMonth === monthFromNumber || currentMonth !== monthFromNumber) && currentMonth !== monthToNumber) {
+            const monthRange = defineDaysInEachMonth(year, month);
 
-            while (dayCounter <= DAYS_PER_MONTH_MAX) {
+            while (dayCounter < monthRange) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -377,6 +439,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -392,13 +457,18 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
             }
           }
 
-          if (month !== monthFromNumber && month === monthToNumber) {
-            while (dayCounter <= dayToNumber) {
+          if (currentMonth !== monthFromNumber && currentMonth === monthToNumber) {
+            while (dayCounter < dayToNumber) {
               const day = FIRST_DAY + dayCounter < 10
                 ? `0${FIRST_DAY + dayCounter}`
                 : FIRST_DAY + dayCounter;
-              const HOURS_PER_DAY = 24;
-              let hourCounter = 0
+
+              if (type === 'Weeks') {
+                const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
+
+                daysRange.push({ date: `${day} ${convertedMonth}`, amount: amount });
+                dayCounter++;
+              }
 
               if (type === 'Days') {
                 const amount = retrieveAndCountAmountFromRange(type, list, year, month, day, null);
@@ -408,6 +478,9 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
               }
 
               if (type === 'Hours') {
+                const HOURS_PER_DAY = 24;
+                let hourCounter = 0;
+
                 while (hourCounter < HOURS_PER_DAY) {
                   const hour = hourCounter < 10
                     ? `0${hourCounter}:00`
@@ -429,6 +502,26 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
     }
 
     yearCounter++;
+  }
+
+  if (type === 'Weeks') {
+    if (daysRange.length !== 0) {
+      let weekCounter = 0;
+
+      while (weekCounter < daysRange.length) {
+        const weekRange = daysRange.slice(0 + weekCounter, 7 + weekCounter);
+        const beginningOfWeek = weekRange[0].date;
+        const endOfWeek = weekRange[weekRange.length - 1].date;
+        let amount = 0;
+
+        for (const day of weekRange) {
+          amount += day.amount;
+        }
+
+        limitedRange.push({ date: `${beginningOfWeek} - ${endOfWeek}`, amount: amount });
+        weekCounter += 7;
+      }
+    }
   }
 
   return limitedRange;

@@ -13,7 +13,7 @@ export function retrieveAndCountAmountFromRange(type, list, year, month, day, ho
       }
     }
 
-    if (type === 'Days') {
+    if (type === 'Weeks' || type === 'Days') {
       if (year === retrievedYear && retrievedMonth.search(month) !== -1 && retrievedDay.search(day) !== -1) {
         amount += Number(item.amount);
       }
