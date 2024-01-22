@@ -3,34 +3,10 @@ import { convertNumberToMonths } from './convertNumberToMonths.js';
 import { retrieveAndCountAmountFromRange } from './retrieveAndCountAmountFromRange.js';
 import { defineDaysInEachMonth } from './defineDaysInEachMonth.js';
 
-export function defineGraphicSettings(type, rangeFrom, rangeTo) {
-  const range = retrieveDataFromRange(type, rangeFrom, rangeTo);
-  const graphicsSettings = {
-    type: 'line',
-    data: {
-      labels: range.map((item) => item.date),
-      datasets: [{
-        label: type,
-        data: range.map((item) => item.amount),
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  }
-
-  return graphicsSettings;
-}
-
-function retrieveDataFromRange(type, rangeFrom, rangeTo) {
+export function retrieveDataFromRange(type, rangeFrom, rangeTo) {
   const list = stats.deposits.list.slice(2);
-  const yearFromNumber = Number(rangeFrom.split("-")[0]);
-  const yearToNumber = Number(rangeTo.split("-")[0]);
+  const yearFromNumber = Number(rangeFrom.split(".")[2]);
+  const yearToNumber = Number(rangeTo.split(".")[2]);
   const yearRange = yearToNumber - yearFromNumber;
   const limitedRange = [];
   const daysRange = [];
@@ -40,12 +16,12 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
     const year = Number(yearFromNumber) + yearCounter;
     const MONTHS_PER_YEAR = 12;
     const FIRST_MONTH = 1
-    const monthFromNumber = rangeFrom.split("-")[1].split("")[0].search('0') !== -1
-      ? Number(rangeFrom.split("-")[1].split("")[1])
-      : Number(rangeFrom.split("-")[1]);
-    const monthToNumber = rangeTo.split("-")[1].split("")[0].search('0') !== -1
-      ? Number(rangeTo.split("-")[1].split("")[1])
-      : Number(rangeTo.split("-")[1]);
+    const monthFromNumber = rangeFrom.split(".")[1].split("")[0].search('0') !== -1
+      ? Number(rangeFrom.split(".")[1].split("")[1])
+      : Number(rangeFrom.split(".")[1]);
+    const monthToNumber = rangeTo.split(".")[1].split("")[0].search('0') !== -1
+      ? Number(rangeTo.split(".")[1].split("")[1])
+      : Number(rangeTo.split(".")[1]);
     const monthRange = yearFromNumber === yearToNumber
       ? monthToNumber - monthFromNumber
       : MONTHS_PER_YEAR - monthFromNumber;
@@ -67,12 +43,12 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
         }
 
         if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
-          const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeFrom.split("-")[2].split("")[1])
-            : Number(rangeFrom.split("-")[2]);
-          const dayToNumber = rangeTo.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeTo.split("-")[2].split("")[1])
-            : Number(rangeTo.split("-")[2]);
+          const dayFromNumber = rangeFrom.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeFrom.split(".")[0].split("")[1])
+            : Number(rangeFrom.split(".")[0]);
+          const dayToNumber = rangeTo.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeTo.split(".")[0].split("")[1])
+            : Number(rangeTo.split(".")[0]);
           const dayRange = dayToNumber - dayFromNumber;
           const FIRST_DAY = 1;
           let dayCounter = 0;
@@ -217,12 +193,12 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
         }
 
         if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
-          const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeFrom.split("-")[2].split("")[1])
-            : Number(rangeFrom.split("-")[2]);
-          const dayToNumber = rangeTo.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeTo.split("-")[2].split("")[1])
-            : Number(rangeTo.split("-")[2]);
+          const dayFromNumber = rangeFrom.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeFrom.split(".")[0].split("")[1])
+            : Number(rangeFrom.split(".")[0]);
+          const dayToNumber = rangeTo.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeTo.split(".")[0].split("")[1])
+            : Number(rangeTo.split(".")[0]);
           const dayRange = dayToNumber - dayFromNumber;
           const FIRST_DAY = 1;
           let dayCounter = 0;
@@ -367,12 +343,12 @@ function retrieveDataFromRange(type, rangeFrom, rangeTo) {
         }
 
         if (type === 'Weeks' || type === 'Days' || type === 'Hours') {
-          const dayFromNumber = rangeFrom.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeFrom.split("-")[2].split("")[1])
-            : Number(rangeFrom.split("-")[2]);
-          const dayToNumber = rangeTo.split("-")[2].split("")[0].search('0') !== -1
-            ? Number(rangeTo.split("-")[2].split("")[1])
-            : Number(rangeTo.split("-")[2]);
+          const dayFromNumber = rangeFrom.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeFrom.split(".")[0].split("")[1])
+            : Number(rangeFrom.split(".")[0]);
+          const dayToNumber = rangeTo.split(".")[0].split("")[0].search('0') !== -1
+            ? Number(rangeTo.split(".")[0].split("")[1])
+            : Number(rangeTo.split(".")[0]);
           const dayRange = dayToNumber - dayFromNumber;
           const FIRST_DAY = 1;
           let dayCounter = 0;

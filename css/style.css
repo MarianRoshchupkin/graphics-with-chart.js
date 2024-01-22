@@ -1,5 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
+  background-color: #EAEBF6;
 }
 
 .container {
@@ -15,15 +16,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 70px 0 0;
+  /* margin: 0 70px 0 0; */
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 0 50px 30px 60px;
-  width: 400px;
+  padding: 15px 24px;
+  /* margin: 0 50px 30px 60px; */
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255);
+  width: 350px;
 }
 
 .range {
@@ -32,24 +36,46 @@ body {
   justify-content: center;
 }
 
+.rangeDesc {
+  display: inline-block;
+  margin: 0 0 5px 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #757575;
+}
+
+.rangeInput {
+  border: none;
+  width: 178px;
+}
+
+.interval {
+  display: flex;
+  flex-direction: column;
+}
+
+.intervalDesc {
+  display: inline-block;
+  margin: 0 0 5px 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #757575;
+}
+
 .button {
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: 1px solid #999;
-  background-color: none;
+  position: relative;
+  left: -5px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
   outline: none;
 }
 
-.button:hover {
-  background-color: #999;
-}
-
-.wrapper {
+/* .wrapper {
   width: 500px;
-}
+} */
 
-.depositContainer {
+/* .depositContainer {
   padding: 20px;
   border: 1px solid #000;
   border-radius: 5px;
@@ -82,4 +108,4 @@ body {
 
 .descBold {
   font-weight: 700;
-}
+} */

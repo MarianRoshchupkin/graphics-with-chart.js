@@ -6,32 +6,38 @@
   <title>Graphics with Chart.js</title>
 
   <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="css/style.css">
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script defer type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script defer type="module" src="js/script.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="buttonsContainer">
       <div class="buttons">
         <div class="range">
-          <span>From</span>
-          <input class="dateFrom" type="date" />
+          <span class="rangeDesc">Date range</span>
+          <input class="rangeInput" name="dates" />
         </div>
-        <div class="range">
-          <span>To</span>
-          <input class="dateTo" type="date" />
+        <div class="interval">
+          <span class="intervalDesc">Interval</span>
+          <select class="button">
+            <option option="months" selected>Months</option>
+            <option option="weeks">Weeks</option>
+            <option option="days">Days</option>
+            <option option="hours">Hours</option>
+          </select>
         </div>
-        <select class="button">
-          <option option="months" selected>Months</option>
-          <option option="weeks">Weeks</option>
-          <option option="days">Days</option>
-          <option option="hours">Hours</option>
-        </select>
       </div>
       <div class="wrapper">
-        <canvas id="myChart"></canvas>
+        <div id="myChart"></div>
       </div>
     </div>
-    <div class="depositContainer">
+    <!-- <div class="depositContainer">
       <h4 class="title">Deposit:</h4>
       <div class="depositWrapper">
         <h3 class="subTitle">Total Deposited: <span class="subTitleThin">3 USDT</span></h3>
@@ -55,9 +61,7 @@
         <p class="desc"><span class="descBold">BSC:</span> -450 USDT</p>
         <p class="desc"><span class="descBold">MATIC:</span> -1650 USDT</p>
       </div>
-    </div>
+    </div> -->
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module" src="js/script.js"></script>
 </body>
 </html>
