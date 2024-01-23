@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Graphics with Chart.js</title>
+  <title>Charts & Analytics</title>
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -16,16 +16,19 @@
   <script defer type="module" src="js/script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="buttonsContainer">
-      <div class="buttons">
-        <div class="range">
-          <span class="rangeDesc">Date range</span>
-          <input class="rangeInput" name="dates" />
+  <main class="main">
+    <section class="paths">
+      <h6 class="paths__title">Charts & Analytics</h6>
+    </section>
+    <section class="bar">
+      <div class="bar__container">
+        <div class="bar__range">
+          <span class="bar__range__desc">Date range</span>
+          <input class="bar__range__input" name="dates" />
         </div>
-        <div class="interval">
-          <span class="intervalDesc">Interval</span>
-          <select class="button">
+        <div class="bar__interval">
+          <span class="bar__interval__desc">Interval</span>
+          <select class="bar__interval__dropdown">
             <option option="months" selected>Months</option>
             <option option="weeks">Weeks</option>
             <option option="days">Days</option>
@@ -33,35 +36,10 @@
           </select>
         </div>
       </div>
-      <div class="wrapper">
-        <div id="myChart"></div>
-      </div>
-    </div>
-    <!-- <div class="depositContainer">
-      <h4 class="title">Deposit:</h4>
-      <div class="depositWrapper">
-        <h3 class="subTitle">Total Deposited: <span class="subTitleThin">3 USDT</span></h3>
-        <p class="desc"><span class="descBold">BSC:</span> 2 USDT</p>
-        <p class="desc"><span class="descBold">MATIC:</span> 1 USDT</p>
-      </div>
-      <div class="depositWrapper">
-        <h3 class="subTitle">Total Cards Spent: <span class="subTitleThin">2103 USDT</span></h3>
-        <p class="desc"><span class="descBold">zkSync:</span> 250 USDT</p>
-        <p class="desc"><span class="descBold">Metamask:</span> 150 USDT</p>
-        <p class="desc"><span class="descBold">Scroll:</span> 450 USDT</p>
-        <p class="desc"><span class="descBold">LayerZero:</span> 300 USDT</p>
-        <p class="desc"><span class="descBold">Starknet:</span> 150 USDT</p>
-        <p class="desc"><span class="descBold">PolygonZkEvm:</span> 150 USDT</p>
-        <p class="desc"><span class="descBold">DeBank:</span> 300 USDT</p>
-        <p class="desc"><span class="descBold">ArbitrumNova:</span> 150 USDT</p>
-        <p class="desc"><span class="descBold">EYWA:</span> 150 USDT</p>
-      </div>
-      <div class="depositWrapper">
-        <h3 class="subTitle">Current Deposit: <span class="subTitleThin">-2097 USDT</span></h3>
-        <p class="desc"><span class="descBold">BSC:</span> -450 USDT</p>
-        <p class="desc"><span class="descBold">MATIC:</span> -1650 USDT</p>
-      </div>
-    </div> -->
-  </div>
+    </section>
+    <section class="graphics">
+      <div id="graphics__charts"></div>
+    </section>
+  </main>
 </body>
 </html>

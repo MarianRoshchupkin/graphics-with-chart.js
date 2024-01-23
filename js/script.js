@@ -3,7 +3,7 @@ import { retrieveDataFromRange } from "./algorithm/retrieveNecessaryData.js";
 window.onload = () => {
   let rangeFrom = '01.04.2023';
   let rangeTo = '31.01.2024';
-  const dropdownList = document.querySelector('.button');
+  const dropdownList = document.querySelector('.bar__interval__dropdown');
   const range = retrieveDataFromRange('Months', rangeFrom, rangeTo);
 
   $('input[name="dates"]').daterangepicker({ 
@@ -17,7 +17,7 @@ window.onload = () => {
 
   function drawChart(range) {
     return function() {
-      const chartDiv = document.getElementById('myChart');
+      const chartDiv = document.getElementById('graphics__charts');
       const chart = new google.visualization.LineChart(chartDiv);
       const data = new google.visualization.DataTable();
       const options = { 

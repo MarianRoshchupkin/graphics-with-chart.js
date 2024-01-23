@@ -1,4 +1,4 @@
-import stats from '../../assets/stats.json' assert { type: 'json' };
+import stats from '../../assets/data/stats.json' assert { type: 'json' };
 import { convertNumberToMonths } from './convertNumberToMonths.js';
 import { retrieveAndCountAmountFromRange } from './retrieveAndCountAmountFromRange.js';
 import { defineDaysInEachMonth } from './defineDaysInEachMonth.js';
