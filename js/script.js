@@ -21,8 +21,9 @@ window.onload = () => {
       const chart = new google.visualization.LineChart(chartDiv);
       const data = new google.visualization.DataTable();
       const options = { 
-        width: 1100, 
-        height: 400, 
+        legend: { position: "none" },
+        width: 1250, 
+        height: 596, 
         backgroundColor: 'transparent' 
       };
 

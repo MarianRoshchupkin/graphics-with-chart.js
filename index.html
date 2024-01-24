@@ -9,16 +9,28 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="css/style.css">
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <script defer type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script defer type="module" src="js/script.js"></script>
 </head>
 <body>
   <main class="main">
     <section class="paths">
-      <h6 class="paths__title">Charts & Analytics</h6>
+      <div class="paths__container">
+        <h6 class="paths__title">Charts & Analytics</h6>
+        <div class="paths__breadcrumbs">
+          <a class="paths__breadcrumbs__link">Overview</a>
+          <span class="paths__breadcrumbs__arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+              <path d="M5.33329 3.15991L10.1952 8.02184C10.4556 8.28219 10.4556 8.7043 10.1952 8.96465L5.33329 13.8266" stroke="black" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="paths__breadcrumbs__devision"></span>
+          <a class="paths__breadcrumbs__link">Chain Paths</a>
+        </div>
+      </div>
     </section>
     <section class="bar">
       <div class="bar__container">
@@ -35,10 +47,50 @@
             <option option="hours">Hours</option>
           </select>
         </div>
+        <a class="bar__search">
+          <span class="bar__search__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5.18562 9.3644C7.49727 9.3644 9.37123 7.49043 9.37123 5.17878C9.37123 2.86713 7.49727 0.993164 5.18562 0.993164C2.87396 0.993164 1 2.86713 1 5.17878C1 7.49043 2.87396 9.3644 5.18562 9.3644Z" stroke="#121219" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.8408 12.834L8.33325 8.32642" stroke="#121219" stroke-width="0.666667" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </span>
+          <span class="bar__search__desc">Search</span>
+        </a>
+        <div class="bar__deposited">
+          <a class="bar__deposited__desc">Total deposited</a>
+        </div>
+        <div class="bar__charts">
+          <div class="bar__charts__types">
+            <button class="bar__charts__type">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                <path d="M8.74886 16.7938V16.7938C8.5469 12.3512 12.0049 8.59559 16.4491 8.43098L18.279 8.3632" stroke="black" stroke-width="0.733094"/>
+                <rect x="16.8127" y="7.26361" width="2.93237" height="2.93237" fill="black"/>
+                <rect x="7.28271" y="16.0607" width="2.93237" height="2.93237" fill="black"/>
+              </svg>
+            </button>
+            <button class="bar__charts__type">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                <path d="M6.69287 15.493L10.6929 10.493L14.6929 13.493L18.6929 7.99304" stroke="black"/>
+                <path d="M7.19287 15.493C7.19287 14.9408 6.74516 14.493 6.19287 14.493C5.64059 14.493 5.19287 14.9408 5.19287 15.493C5.19287 16.0453 5.64059 16.493 6.19287 16.493C6.74516 16.493 7.19287 16.0453 7.19287 15.493Z" fill="#0A0A0A" stroke="black"/>
+                <path d="M11.6929 10.493C11.6929 9.94076 11.2452 9.49304 10.6929 9.49304C10.1406 9.49304 9.69287 9.94076 9.69287 10.493C9.69287 11.0453 10.1406 11.493 10.6929 11.493C11.2452 11.493 11.6929 11.0453 11.6929 10.493Z" fill="#0A0A0A" stroke="black"/>
+                <path d="M15.6929 13.493C15.6929 12.9408 15.2452 12.493 14.6929 12.493C14.1406 12.493 13.6929 12.9408 13.6929 13.493C13.6929 14.0453 14.1406 14.493 14.6929 14.493C15.2452 14.493 15.6929 14.0453 15.6929 13.493Z" fill="#0A0A0A" stroke="black"/>
+                <path d="M19.1929 8.49304C19.1929 7.94076 18.7452 7.49304 18.1929 7.49304C17.6406 7.49304 17.1929 7.94076 17.1929 8.49304C17.1929 9.04533 17.6406 9.49304 18.1929 9.49304C18.7452 9.49304 19.1929 9.04533 19.1929 8.49304Z" fill="#0A0A0A" stroke="black"/>
+              </svg>
+            </button>
+            <button class="bar__charts__type">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M14.1929 1.85107V15.8511M10.1929 5.85107V15.8511M6.19287 1.85107V15.8511M2.19287 5.85107V15.8511" stroke="black"/>
+              </svg>
+            </button>
+          </div>
+          <button class="bar__charts__reset">Reset</button>
+        </div>
       </div>
     </section>
     <section class="graphics">
-      <div id="graphics__charts"></div>
+      <div class="graphics__container">
+        <div id="graphics__charts"></div>
+      </div>
     </section>
   </main>
 </body>
